@@ -1,11 +1,9 @@
-const Joi = require("joi");
+import Joi from "joi.js";
 
-const contactSchema = Joi.object({
+const contactsSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
 });
 
-module.exports = {
-  validateContact: (contact) => contactSchema.validate(contact),
-};
+export const validateContact = (contact) => contactsSchema.validate(contact);

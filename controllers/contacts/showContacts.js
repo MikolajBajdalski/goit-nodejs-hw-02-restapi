@@ -1,4 +1,4 @@
-const { getContactById } = require("../../models/contacts");
+import { getContactById } from "../../models/contacts.js";
 
 async function showContacts(req, res, next) {
   try {
@@ -12,4 +12,4 @@ async function showContacts(req, res, next) {
   }
 }
 
-module.exports = showContacts;
+export { showContacts };

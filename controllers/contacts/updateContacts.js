@@ -1,4 +1,4 @@
-const { updateContact } = require("../../models/contacts");
+import { updateContact } from "../../models/contacts.js";
 
 async function updateContacts(req, res, next) {
   try {
@@ -12,4 +12,4 @@ async function updateContacts(req, res, next) {
   }
 }
 
-module.exports = updateContacts;
+export { updateContacts };

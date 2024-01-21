@@ -1,7 +1,7 @@
-const fs = require("fs/promises");
-const path = require("path");
+import fs from "fs/promises.js";
+import path from "path.js";
 
-const contactsPath = path.join(__dirname, "contacts.json");
+const contactsPath = path.join(process.cwd() + "/contacts.json");
 
 const listContacts = async () => {
   const data = await fs.readFile(contactsPath);
@@ -41,7 +41,7 @@ const updateContact = async (contactId, body) => {
   return contacts[index];
 };
 
-module.exports = {
+export {
   listContacts,
   getContactById,
   removeContact,
