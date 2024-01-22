@@ -1,9 +1,10 @@
-import { addContact } from "../../models/contacts.js";
+import Contact from "#models/contacts.js";
 
 async function createContacts(req, res, next) {
   try {
-    const contact = await addContact(req.body);
-    res.status(201).json(contact);
+    const newContact = new Contact(req.body);
+    await newContact.save();
+    return res.status(201).json(newContact);
   } catch (err) {
     next(err);
   }
