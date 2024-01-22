@@ -10,7 +10,7 @@ async function updateContacts(req, res, next) {
     if (!contact) {
       return res.status(404).json({ message: "Contact not found" });
     }
-    res.status(200).json(contact);
+    return res.status(200).json(contact);
   } catch (err) {
     next(err);
   }

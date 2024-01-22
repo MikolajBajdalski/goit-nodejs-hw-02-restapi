@@ -17,7 +17,7 @@ export async function updateFavoriteStatus(req, res, next) {
     if (!updatedContact) {
       return res.status(404).json({ message: "Not found" });
     }
-    res.status(200).json(updatedContact);
+    return res.status(200).json(updatedContact);
   } catch (err) {
     next(err);
   }

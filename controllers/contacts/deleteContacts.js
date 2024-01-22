@@ -6,7 +6,7 @@ async function deleteContacts(req, res, next) {
     if (!contact) {
       return res.status(404).json({ message: "Contact not found" });
     }
-    res.status(200).json({ message: "Contact deleted" });
+    return res.status(200).json({ message: "Contact deleted" });
   } catch (err) {
     next(err);
   }

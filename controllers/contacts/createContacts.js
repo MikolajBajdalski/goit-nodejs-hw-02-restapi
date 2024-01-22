@@ -4,7 +4,7 @@ async function createContacts(req, res, next) {
   try {
     const newContact = new Contact(req.body);
     await newContact.save();
-    res.status(201).json(newContact);
+    return res.status(201).json(newContact);
   } catch (err) {
     next(err);
   }
