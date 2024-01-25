@@ -1,4 +1,5 @@
 import express from "express.js";
+import authMiddleware from "#middlewares/authMiddleware.js";
 import indexContacts from "#controllers/contacts/indexContacts.js";
 import showContacts from "#controllers/contacts/showContacts.js";
 import createContacts from "#controllers/contacts/createContacts.js";
@@ -7,6 +8,8 @@ import updateContacts from "#controllers/contacts/updateContacts.js";
 import updateFavoriteStatus from "#controllers/contacts/updateFavoriteStatus.js";
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 router.get("/", indexContacts);
 router.get("/:contactId", showContacts);
