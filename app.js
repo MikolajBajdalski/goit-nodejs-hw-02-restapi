@@ -2,12 +2,14 @@ import express from "express.js";
 import logger from "morgan.js";
 import cors from "cors.js";
 require("dotenv").config();
+import userRoutes from "./routes/api/userRoutes.js";
 
 import contactsRouter from "./routes/api/contacts.js";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/users", userRoutes);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
