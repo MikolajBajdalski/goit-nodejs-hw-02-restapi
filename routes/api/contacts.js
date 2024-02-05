@@ -1,4 +1,4 @@
-import express from "express.js";
+import express from "express";
 import authMiddleware from "#middlewares/authMiddleware.js";
 import indexContacts from "#controllers/contacts/indexContacts.js";
 import showContacts from "#controllers/contacts/showContacts.js";

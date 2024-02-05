@@ -9,4 +9,4 @@ async function indexContacts(req, res, next) {
   }
 }
 
-export { indexContacts };
+export default indexContacts;

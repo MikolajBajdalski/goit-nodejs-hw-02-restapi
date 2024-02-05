@@ -12,4 +12,4 @@ async function showContacts(req, res, next) {
   }
 }
 
-export { showContacts };
+export default showContacts;
