@@ -10,4 +10,4 @@ async function createContacts(req, res, next) {
   }
 }
 
-export { createContacts };
+export default createContacts;

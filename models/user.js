@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import gravatar from "gravatar";
 
 const { Schema } = mongoose;
 
@@ -11,6 +12,18 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Email is required"],
     unique: true,
+
+    default: function () {
+      return gravatar.url(
+        this.email,
+        {
+          s: "200",
+          r: "pg",
+          d: "mm",
+        },
+        true
+      );
+    },
   },
   subscription: {
     type: String,
@@ -20,6 +33,12 @@ const userSchema = new Schema({
   token: {
     type: String,
     default: null,
+  },
+  avatarURL: {
+    type: String,
+    default: function () {
+      return gravatar.url(this.email, { s: "200", r: "pg", d: "mm" }, true);
+    },
   },
 });
 

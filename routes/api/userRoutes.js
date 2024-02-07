@@ -1,11 +1,13 @@
 import express from "express";
-import { userSignup } from "../../controllers/userController.js";
+import { userSignup, updateAvatar } from "../../controllers/userController.js";
 import authMiddleware from "#middlewares/authMiddleware.js";
 import User from "#models/user.js";
 
 const router = express.Router();
 
 router.post("/signup", userSignup);
+
+router.patch("/avatars", authMiddleware, updateAvatar);
 
 router.get("/logout", authMiddleware, async (req, res) => {
   try {

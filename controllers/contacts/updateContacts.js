@@ -16,4 +16,4 @@ async function updateContacts(req, res, next) {
   }
 }
 
-export { updateContacts };
+export default updateContacts;

@@ -22,3 +22,5 @@ export async function updateFavoriteStatus(req, res, next) {
     next(err);
   }
 }
+
+export default updateFavoriteStatus;
