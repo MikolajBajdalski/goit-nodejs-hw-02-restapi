@@ -6,6 +6,8 @@ import multer from "multer";
 import jimp from "jimp";
 import path from "path";
 import fs from "fs/promises";
+import { nanoid } from "nanoid";
+import sendEmail from "../config/mailgun-config.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -40,10 +42,23 @@ const userSignup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ email, password: hashedPassword });
+    const verificationToken = nanoid();
+    const user = new User({
+      email,
+      password: hashedPassword,
+      verificationToken,
+    });
     await user.save();
+
+    const verificationLink = `http://localhost:3000/users/verify/${verificationToken}`;
+    await sendEmail({
+      to: email,
+      subject: "Verify Your Email",
+      html: `Please click on the following link to verify your email: <a href="${verificationLink}">${verificationLink}</a>`,
+    });
+
     res.status(201).json({
-      message: "User created",
+      message: "User created. Please verify your email.",
       user: { email: user.email, avatarURL: user.avatarURL },
     });
   } catch (err) {
@@ -65,8 +80,10 @@ const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ message: "Email or password is wrong" });
+    if (!user || !user.verify) {
+      return res
+        .status(401)
+        .json({ message: "Email or password is wrong, or email not verified" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -85,6 +102,7 @@ const userLogin = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
 const updateAvatar = async (req, res) => {
   const uploadSingle = upload.single("avatar");
 

@@ -12,18 +12,6 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Email is required"],
     unique: true,
-
-    default: function () {
-      return gravatar.url(
-        this.email,
-        {
-          s: "200",
-          r: "pg",
-          d: "mm",
-        },
-        true
-      );
-    },
   },
   subscription: {
     type: String,
@@ -39,6 +27,14 @@ const userSchema = new Schema({
     default: function () {
       return gravatar.url(this.email, { s: "200", r: "pg", d: "mm" }, true);
     },
+  },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, "Verify token is required"],
   },
 });
 
